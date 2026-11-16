@@ -21,16 +21,17 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v4
+      - name: Install Gradle 8.13
+        run: |
+          wget https://services.gradle.org/distributions/gradle-8.13-bin.zip
+          unzip -q gradle-8.13-bin.zip
+          echo "$GITHUB_WORKSPACE/gradle-8.13/bin" >> "$GITHUB_PATH"
 
       - name: Extract project
         run: unzip -o PDFStudio_Android_Project_v1.4_logo.zip
 
       - name: Build APK
-        run: |
-          chmod +x PDFStudio/gradlew
-          ./PDFStudio/gradlew -p PDFStudio assembleDebug
+        run: gradle -p PDFStudio assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
