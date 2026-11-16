@@ -1,10 +1,11 @@
+
 name: Build PDF Studio APK
 
 on:
   workflow_dispatch:
   push:
     paths:
-      - 'PDFStudio_Android_Project_v1.4_logo.zip'
+      - 'PDFStudio_Android_Project_v1.4_logo_fixed.zip'
       - '.github/workflows/build-apk.yml'
 
 jobs:
@@ -28,7 +29,7 @@ jobs:
           echo "$GITHUB_WORKSPACE/gradle-8.13/bin" >> "$GITHUB_PATH"
 
       - name: Extract project
-        run: unzip -o PDFStudio_Android_Project_v1.4_logo.zip
+        run: unzip -o PDFStudio_Android_Project_v1.4_logo_fixed.zip
 
       - name: Build APK
         run: gradle -p PDFStudio assembleDebug
